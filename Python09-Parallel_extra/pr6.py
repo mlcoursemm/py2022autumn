@@ -25,7 +25,8 @@ if __name__ == "__main__":
     res_arr = []
     with concurrent.futures.ProcessPoolExecutor(max_workers=num_proc) as executor:
         for i in range(1, num_proc+1):
-            res_arr.append(executor.submit(process_function, i, i+1).result())
+            res_arr.append(executor.submit(process_function, i, i+1))
+    res_arr = [r.result() for r in res_arr]
     print_proc(f'result of processes - {res_arr}')
     print_proc('all done')
  
